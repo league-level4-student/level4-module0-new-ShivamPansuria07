@@ -39,7 +39,18 @@ public class Snake {
 
         int nextX;
         int nextY;
+        switch (currentDirection) {
+        
+        	
+        case RIGHT:
+        	head.setLocation(new Location(head.getLocation().getX()+1,head.getLocation().getY()));
+            break;
+        case LEFT:
+        	head.setLocation(new Location(head.getLocation().getX()-1,head.getLocation().getY()));
+            break;
+        
 
+        }
         
         /*
          * Change the Location of each SnakeSegment in your snake ArrayList to
@@ -48,6 +59,7 @@ public class Snake {
          * Use a loop starting at the end of the ArrayList and stop before the
          * head of the snake (index 0) or you will go out of bounds.
          */
+   
         
         
 

@@ -51,7 +51,7 @@ public class EncapsulateTheDataTest {
         assertTrue(isEncapsulated("degreesTurned"));
 
     }
-
+     
     @Test
     void degreesTurnedGetterSetter() {
 

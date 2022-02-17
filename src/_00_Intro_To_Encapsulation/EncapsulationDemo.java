@@ -8,14 +8,17 @@ public class EncapsulationDemo {
      * from outside classes.
      * 
      * 1.) Read about the Car and SUV classes below.
-     * 
+     *
      * 2.) Try instantiating objects of each in the main to access their values
      * and methods. If you can't access a value or method, find out why and
      * change it or make a new method that enables you to do so.
      */
 
     public static void main(String[] args) {
-
+         Car car = new Car(100, 50, "blue", 25);
+         System.out.println("Car Capacity: "+car.getTankCapacity());
+         System.out.println("Car Miles per gallon:"+car.mpg);
+         car.drive();
     }
 
 }
