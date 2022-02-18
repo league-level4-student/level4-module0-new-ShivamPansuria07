@@ -59,7 +59,10 @@ public class Snake {
          * Use a loop starting at the end of the ArrayList and stop before the
          * head of the snake (index 0) or you will go out of bounds.
          */
-   
+        for (int m = snake.size()-1; m > 0; m--) {
+        	Location loadingSegment = snake.get(m-1).getLocation();
+			snake.get(m-1).setLocation(loadingSegment);
+		}
         
         
 
@@ -69,7 +72,7 @@ public class Snake {
          * location.
          */
         
-        
+        Location newSegment = 
 
         // Set the canMove member variable to true.
 

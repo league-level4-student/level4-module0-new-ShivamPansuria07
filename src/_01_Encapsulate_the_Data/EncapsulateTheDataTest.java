@@ -57,9 +57,9 @@ public class EncapsulateTheDataTest {
 
         double randomPositiveNum = new Random().nextDouble() * 360;
 
-        testData.setDegreesTurned(randomPositiveNum);
+        testData.setDegrees(randomPositiveNum);
 
-        assertEquals(randomPositiveNum, testData.getDegreesTurned());
+        assertEquals(randomPositiveNum, testData.getDegrees());
 
     }
 
@@ -74,9 +74,9 @@ public class EncapsulateTheDataTest {
             randomNumOutsideBounds -= 360;
         }
 
-        testData.setDegreesTurned(randomNumOutsideBounds);
+        testData.setDegrees(randomNumOutsideBounds);
 
-        double boundedNum = testData.getDegreesTurned();
+        double boundedNum = testData.getDegrees();
 
         assertTrue(boundedNum >= 0 && boundedNum <= 360);
 
