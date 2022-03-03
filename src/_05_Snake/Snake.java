@@ -72,11 +72,11 @@ public class Snake {
          * location.
          */
         
-        Location newSegment = 
+        // currenty paused for this step - Location newSegment = 
 
         // Set the canMove member variable to true.
 
-
+        canMove = true;
 
     }
 
@@ -90,13 +90,18 @@ public class Snake {
          * Hint: Use the isOppositeDirection method to check if Direction d is
          * opposite.
          */
+    	
+    	if(!isOppositeDirection(direction) && canMove == true) {
+    		canMove = false;
+    		currentDirection = direction;
+    	}
         
         
 
     }
 
     private boolean isOppositeDirection(Direction direction) {
-
+    	
         /*
          * Complete the method so it returns true if the passed in Direction is
          * the opposite value of the currentDirection member variable.
@@ -104,23 +109,33 @@ public class Snake {
          * Otherwise, return false. For example, if currentDirection is UP and
          * the passed in direction is DOWN this method should return false.
          */
-
-        boolean isOpposite = true;
-
-        return isOpposite;
+    	if(direction.UP == currentDirection.DOWN) {
+    		  boolean isOpposite = true;
+    	        return isOpposite;
+    	}else if(direction.DOWN == currentDirection.UP) {
+    		   boolean isOpposite = true;
+    	        return isOpposite;
+    	}else if(direction.RIGHT == currentDirection.LEFT) {
+ 		   boolean isOpposite = true;
+	        return isOpposite;
+	}else if(direction.LEFT == currentDirection.RIGHT) {
+		   boolean isOpposite = true;
+	        return isOpposite;
+	}
+     
     }
 
     public void resetLocation() {
 
         // Clear the snake.
 
-        
+        snake.clear();
         
         /*
          * Create a new Location object for the head at SnakeGame.WIDTH / 2,
          * SnakeGame.HEIGHT / 2.
          */
-
+       
 
         /*
          * Set the head member variable equal to a new SnakeSegment object. Use
