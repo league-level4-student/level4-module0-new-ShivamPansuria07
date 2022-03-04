@@ -4,13 +4,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import org.junit.experimental.theories.FromDataPoints;
+
 public class Snake {
     public static final Color SNAKE_COLOR = Color.BLUE;
     public static final int BODY_SIZE = 50;
 
     private SnakeSegment head;
     private ArrayList<SnakeSegment> snake;
-
+    Location loadingSegment;
+    Location SnakeLocation;
     private Direction currentDirection;
 
     private boolean canMove = true;
@@ -36,17 +39,17 @@ public class Snake {
          * and calculate the head's next x and y position. Depending on the
          * direction, the head's x or y will increase or decrease by 1.
          */
-
+    	Location loc;
         int nextX;
         int nextY;
         switch (currentDirection) {
         
         	
         case RIGHT:
-        	head.setLocation(new Location(head.getLocation().getX()+1,head.getLocation().getY()));
+        	loc = new Location(head.getLocation().getX()+1,head.getLocation().getY());
             break;
         case LEFT:
-        	head.setLocation(new Location(head.getLocation().getX()-1,head.getLocation().getY()));
+        	loc = new Location(head.getLocation().getX()-1,head.getLocation().getY());
             break;
         
 
@@ -60,7 +63,7 @@ public class Snake {
          * head of the snake (index 0) or you will go out of bounds.
          */
         for (int m = snake.size()-1; m > 0; m--) {
-        	Location loadingSegment = snake.get(m-1).getLocation();
+        	 loadingSegment = snake.get(m-1).getLocation();
 			snake.get(m-1).setLocation(loadingSegment);
 		}
         
@@ -72,7 +75,7 @@ public class Snake {
          * location.
          */
         
-        // currenty paused for this step - Location newSegment = 
+         
 
         // Set the canMove member variable to true.
 
@@ -122,6 +125,7 @@ public class Snake {
 		   boolean isOpposite = true;
 	        return isOpposite;
 	}
+		return canMove;
      
     }
 
@@ -135,42 +139,58 @@ public class Snake {
          * Create a new Location object for the head at SnakeGame.WIDTH / 2,
          * SnakeGame.HEIGHT / 2.
          */
+        SnakeLocation = head.getLocation();
+       SnakeLocation.setX(SnakeGame.WIDTH / 2);
+       SnakeLocation.setX(SnakeGame.HEIGHT / 2);
        
-
+        
         /*
          * Set the head member variable equal to a new SnakeSegment object. Use
          * the Location created in step 2 for the Location and the BODY_SIZE
          * constant for the size.
          */
 
-
+       head = new SnakeSegment(SnakeLocation, BODY_SIZE);
 
         // Add the head to the snake.
 
-
+        snake.add(head);
 
     }
 
     public boolean isOutOfBounds() {
-
+//the bounds are not fixed
         /*
          * Complete the method so it returns true if the head of the snake is
          * outside of the window and false otherwise.
          */
-
-
-        return false;
+    	if(head.getLocation().getX()>SnakeGame.WIDTH) {
+    		return true;
+    	} else if(head.getLocation().getY()>SnakeGame.HEIGHT) {
+    		return true;
+    	} else if(head.getLocation().getX()<0) {
+    		return true;
+    	} else if(head.getLocation().getY()<0) {
+    		return true;
+    	}else {
+    		return false;
+    	}
         
+        
+    
     }
-
     public boolean isHeadCollidingWithBody() {
 
         /*
          * Complete the method so it returns true if the head is located in the
          * same location as any other body segment.
          */
-
-        
+    	
+        for (int i = 0; i < snake.size(); i++) {
+        	if(head.getLocation() == snake.get(i).getLocation()) {
+        		return true;
+        	}
+		}
         return false;
     }
 
@@ -180,7 +200,11 @@ public class Snake {
          * Complete the method so it returns true if the passed in location is
          * located on the snake.
          */
-
+    	for (int i = 0; i < snake.size(); i++) {
+        	if(loc == snake.get(i).getLocation()) {
+        		return true;
+        	}
+		}
         return false;
     }
 
