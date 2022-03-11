@@ -106,16 +106,20 @@ public class SnakeGame implements ActionListener, KeyListener {
     	switch (e.getKeyCode()) {
 
         case KeyEvent.VK_UP:
+        	System.out.println("up");
            snake.setDirection(Direction.UP);
             break;
         case KeyEvent.VK_DOWN:
         	snake.setDirection(Direction.DOWN);
+        	System.out.println("down");
             break;
         case KeyEvent.VK_RIGHT:
         	snake.setDirection(Direction.RIGHT);
+        	System.out.println("right");
             break;
         case KeyEvent.VK_LEFT:
         	snake.setDirection(Direction.LEFT);
+        	System.out.println("left");
             break;
 
         }
@@ -148,7 +152,7 @@ public class SnakeGame implements ActionListener, KeyListener {
     }
 
     private void gameOver() {
-
+    	
         // Stop the timer member variable.
     	timer.stop();
     		
@@ -170,7 +174,7 @@ public class SnakeGame implements ActionListener, KeyListener {
         	snake.resetLocation();
         	setFoodLocation();
         	timer.restart();
-        }else {
+        }else if(str=="no"){
         	System.exit(0);
         }
         
@@ -193,6 +197,7 @@ public class SnakeGame implements ActionListener, KeyListener {
          * outside the bounds of the frame call the gameOver method.
          */
     	if(snake.isOutOfBounds() || snake.isHeadCollidingWithBody()) {
+    		System.out.println("GameOver is called");
     		gameOver();
     	}
 
@@ -201,9 +206,11 @@ public class SnakeGame implements ActionListener, KeyListener {
          * If the location of the snake's head is equal to the location of the
          * food, feed the snake and set the food location.
          */
-//    	if(snake.getHeadLocation()==snake.) {
-//    		
-//    	}
+    	if(snake.getHeadLocation().getX()==foodLocation.getX() && snake.getHeadLocation().getY()==foodLocation.getY()) {
+    		snake.feed();
+    		setFoodLocation();
+    		
+    	}
         
         panel.repaint();
     }
