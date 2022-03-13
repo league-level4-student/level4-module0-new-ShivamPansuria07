@@ -29,7 +29,7 @@ public class SnakeGame implements ActionListener, KeyListener {
     private JPanel panel;
 
     private Snake snake;
-
+    String str;
     private Timer timer;
 
     private Location foodLocation;
@@ -106,8 +106,8 @@ public class SnakeGame implements ActionListener, KeyListener {
     	switch (e.getKeyCode()) {
 
         case KeyEvent.VK_UP:
-        	System.out.println("up");
            snake.setDirection(Direction.UP);
+           System.out.println("up");
             break;
         case KeyEvent.VK_DOWN:
         	snake.setDirection(Direction.DOWN);
@@ -152,6 +152,7 @@ public class SnakeGame implements ActionListener, KeyListener {
     }
 
     private void gameOver() {
+    	System.out.println("Game Over is called");
     	
         // Stop the timer member variable.
     	timer.stop();
@@ -162,21 +163,21 @@ public class SnakeGame implements ActionListener, KeyListener {
     	JOptionPane.showMessageDialog(null, "Your snake is dead!");
 
         // Ask the user if they want to play again.
-
-        String str = JOptionPane.showInputDialog("Would you like to play again?");
-
+        str = JOptionPane.showInputDialog("Would you like to play again?");
+        if(str.contentEquals("yes")) {
+        	snake.resetLocation();
+        	setFoodLocation();
+        	timer.restart();
+        }
+        if(str.contentEquals("no")){
+        	System.exit(0);
+        }
         /*
          * If the user wants to play again, call the Snake class's resetLocation
          * method and this class's setFoodLocation method then restart the
          * timer. Otherwise, exit the game.
          */
-        if(str == "yes") {
-        	snake.resetLocation();
-        	setFoodLocation();
-        	timer.restart();
-        }else if(str=="no"){
-        	System.exit(0);
-        }
+        
         
 
     }
@@ -197,7 +198,6 @@ public class SnakeGame implements ActionListener, KeyListener {
          * outside the bounds of the frame call the gameOver method.
          */
     	if(snake.isOutOfBounds() || snake.isHeadCollidingWithBody()) {
-    		System.out.println("GameOver is called");
     		gameOver();
     	}
 

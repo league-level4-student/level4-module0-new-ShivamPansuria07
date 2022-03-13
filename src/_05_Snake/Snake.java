@@ -51,10 +51,10 @@ public class Snake {
 			loc = new Location(head.getLocation().getX() - 1, head.getLocation().getY());
 			break;
 		case UP:
-			loc = new Location(head.getLocation().getX(), head.getLocation().getY() + 1);
+			loc = new Location(head.getLocation().getX(), head.getLocation().getY() - 1);
 			break;
 		case DOWN:
-			loc = new Location(head.getLocation().getX(), head.getLocation().getY() - 1);
+			loc = new Location(head.getLocation().getX(), head.getLocation().getY() + 1);
 			break;
 		}
 
@@ -67,7 +67,7 @@ public class Snake {
 		 */
 		for (int m = snake.size() - 1; m > 0; m--) {
 			loadingSegment = snake.get(m - 1).getLocation();
-			snake.get(m - 1).setLocation(loadingSegment);
+			snake.get(m).setLocation(loadingSegment);
 		}
 		head.setLocation(loc);
 		/*
@@ -108,8 +108,7 @@ public class Snake {
 		 * passed in direction is DOWN this method should return false.
 		 */
 		if (direction == Direction.UP && currentDirection == Direction.DOWN) {
-			//
-			System.out.println(" DO UP");
+			//System.out.println(" DO UP");
 			return true;
 		} else if (direction == Direction.DOWN && currentDirection == Direction.UP) {
 			//System.out.println(" DO DOWN");
@@ -181,7 +180,8 @@ public class Snake {
 		 */
 
 		for (int i = 1; i < snake.size(); i++) {
-			if (head.getLocation() == snake.get(i).getLocation()) {
+			if (head.getLocation().getX() == snake.get(i).getLocation().getX() && head.getLocation().getY() == snake.get(i).getLocation().getY()) {
+				System.out.println("head collision with body");
 				return true;
 			}
 		}
